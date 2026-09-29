@@ -1,0 +1,933 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>官渡区土地覆盖变化查询系统</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f3f6f4; color: #16342d; font-family: "Microsoft YaHei", Arial, sans-serif; }
+    header { padding: 22px max(24px, calc((100% - 1120px)/2)); color: white; background: #185745; }
+    h1 { margin: 0; font-size: 23px; }
+    header p { margin: 8px 0 0; font-size: 14px; }
+    main { max-width: 1120px; margin: 24px auto; padding: 0 18px; }
+    section { margin-bottom: 22px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 10px #193c2b11; }
+    h2 { margin: 0 0 16px; font-size: 19px; }
+    .controls { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+    label { display: grid; gap: 6px; font-size: 14px; }
+    select, button { min-height: 38px; padding: 6px 10px; border-radius: 6px; font: inherit; }
+    select { min-width: 115px; border: 1px solid #bccbc5; }
+    button { border: 0; background: #216e55; color: white; cursor: pointer; }
+    button:hover { background: #164d3b; }
+    button:disabled { background: #82958d; cursor: default; }
+    .muted { color: #546b61; font-size: 14px; line-height: 1.6; }
+    .status { min-height: 24px; margin: 12px 0 0; font-size: 14px; }
+    .error { color: #b52222; }
+    #map { width: 100%; height: 550px; background: #e8eeea; border-radius: 6px; }
+    .map-tools { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 12px; }
+    .map-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin: 10px 0 14px; font-size: 13px; }
+    .map-legend-item { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .map-swatch { display: inline-block; width: 15px; height: 15px; border: 1px solid #718078; border-radius: 3px; }
+    .check { display: flex; gap: 6px; align-items: center; }
+    .check input { width: 16px; height: 16px; }
+    .leaflet-popup-content { min-width: 230px; max-width: 340px; max-height: 340px; overflow-y: auto; line-height: 1.6; }
+    .popup-title { font-weight: bold; margin-bottom: 5px; }
+    .popup-years { margin: 5px 0; padding-left: 20px; }
+    .popup-years li { margin: 2px 0; }
+    .year-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-top: 14px; }
+    .year-card { display: block; min-width: 0; padding: 0; overflow: hidden; text-align: left; border: 2px solid #dbe6df; border-radius: 8px; background: white; color: #16342d; }
+    .year-card:hover, .year-card.active { border-color: #216e55; }
+    .year-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #e8eeea; }
+    .year-card span { display: block; padding: 8px 10px; font-weight: bold; }
+    .chart-controls { display: flex; align-items: end; gap: 14px; flex-wrap: wrap; margin-bottom: 10px; }
+    .class-choices { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 10px 0; }
+    .class-choices label { display: inline-flex; align-items: center; gap: 4px; }
+    .chart-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .chart-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; min-width: 0; }
+    .chart-group-title { margin: 10px 0 0; font-size: 16px; }
+    .chart-box { width: 100%; min-width: 0; height: 430px; overflow: hidden; border: 1px solid #dbe6df; border-radius: 8px; background: #fff; }
+    .matrix-wrap { overflow-x: auto; border: 1px solid #dbe6df; border-radius: 8px; }
+    .matrix-table { width: 100%; min-width: 790px; border-collapse: collapse; text-align: right; font-size: 13px; }
+    .matrix-table caption { padding: 14px; text-align: left; font-weight: bold; font-size: 16px; }
+    .matrix-table th, .matrix-table td { border: 1px solid #e2e9e4; padding: 8px; white-space: nowrap; }
+    .matrix-table th { background: #eff5f1; }
+    .matrix-table td.changed { background: #e9f5ee; }
+    .matrix-table td.same { color: #6f8076; background: #f7f9f7; }
+    #graph-chart { width: 100%; height: 520px; border: 1px solid #dbe6df; border-radius: 8px; }
+    .ask-form { display: grid; gap: 10px; margin-bottom: 16px; }
+    .ask-form textarea { width: 100%; min-height: 76px; padding: 10px; resize: vertical; border: 1px solid #bccbc5; border-radius: 6px; font: inherit; }
+    .ask-form button { justify-self: start; }
+    .answer { margin: 10px 0 18px; padding: 14px; border-left: 4px solid #216e55; background: #f1f7f3; line-height: 1.7; white-space: pre-wrap; }
+    @media (max-width: 850px) { .chart-pair { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>官渡区 1990–2025 年土地覆盖变化查询系统</h1>
+  </header>
+  <main>
+    <section aria-labelledby="query-title">
+      <h2 id="query-title">查询条件</h2>
+      <p class="muted">仅支持官渡区 1990–2025 年土地覆盖变化及相关资料查询。</p>
+      <form id="ask-form" class="ask-form">
+        <label for="question">输入土地覆盖问题</label>
+        <textarea id="question" required maxlength="500" placeholder="例如：官渡区 2010–2020 年耕地转为建设用地的面积是多少？"></textarea>
+        <button id="ask-button" type="submit">提问</button>
+      </form>
+      <p id="ask-status" class="status" role="status"></p>
+      <div id="answer" class="answer" hidden></div>
+      <div class="controls">
+        <label>起始年份<select id="start-year"></select></label>
+        <label>结束年份<select id="end-year"></select></label>
+        <button type="button" id="query-button">查询</button>
+      </div>
+      <p id="query-status" class="status" role="status"></p>
+    </section>
+    <section aria-labelledby="map-title">
+      <h2 id="map-title">GIS 地图</h2>
+      <div class="map-tools">
+        <label>当前地图年份<select id="map-year"></select></label>
+        <label class="check"><input id="change-toggle" type="checkbox"><span id="change-label">选择两个年份后可显示变化高亮</span></label>
+        <label>最小连续变化斑块面积（km²）
+          <input id="min-patch" type="number" min="0" max="100" step="0.0009" value="0">
+        </label>
+      </div>
+      <div id="map-legend" class="map-legend" aria-label="土地覆盖地类颜色图例"></div>
+      <div id="map" aria-label="官渡区土地覆盖地图"></div>
+      <p class="muted">颜色表示年度土地覆盖类别；变化高亮按转入类型着色，颜色可能与年度图例不同。</p>
+      <p id="map-status" class="status muted" role="status">正在初始化地图……</p>
+      <h3>查询区间内的全部年份地图</h3>
+      <div id="year-grid" class="year-grid"></div>
+    </section>
+    <section aria-labelledby="charts-title">
+      <h2 id="charts-title">统计图表</h2>
+      <div class="chart-controls">
+        <label>图表场景
+          <select id="chart-mode">
+            <option value="auto">自动匹配</option>
+            <option value="compare">起止年份整体对比</option>
+            <option value="timeseries">地类逐年面积变化</option>
+            <option value="netchange">单一地类逐年净增减</option>
+            <option value="transition">地类转移矩阵</option>
+            <option value="changedareas">变化区域转入／转出</option>
+            <option value="periodcompare">两个年份区间转移量对比</option>
+          </select>
+        </label>
+      </div>
+      <div id="class-choices" class="class-choices"></div>
+      <p id="chart-status" class="status" role="status"></p>
+      <div id="chart-grid" class="chart-grid"></div>
+    </section>
+    <section aria-labelledby="graph-title">
+      <h2 id="graph-title">知识图谱</h2>
+      <p id="graph-status" class="status" role="status"></p>
+      <div id="graph-chart" aria-label="土地覆盖关系知识图谱"></div>
+    </section>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"></script>
+  <script>
+    "use strict";
+    // 生产环境由同源 Nginx 代理 /api；本地静态服务器可通过 ?api= 覆盖。
+    // Support both the production Nginx URL and opening index.html directly.
+    // The latter must still call the running API instead of resolving /api
+    // against file:/// and silently leaving charts empty.
+    const API = new URLSearchParams(location.search).get("api") ||
+      (location.protocol === "file:" ? "http://127.0.0.1:8001" : "");
+    const byId = id => document.getElementById(id);
+    const queryStatus = byId("query-status");
+    const mapStatus = byId("map-status");
+    const startInput = byId("start-year");
+    const endInput = byId("end-year");
+    const mapYearInput = byId("map-year");
+    const changeToggle = byId("change-toggle");
+    let map, annualLayer, changeLayer, currentQuery, requestNumber = 0;
+    let chartInstances = [], chartRequestNumber = 0, graphInstance, graphRequestNumber = 0;
+    let latestPeriodComparison = null;
+    let classColors = new Map();
+    const classes = [
+      [1, "耕地"], [2, "林地"], [3, "灌丛"], [4, "草地"], [5, "水体"],
+      [6, "积雪／冰川"], [7, "裸地"], [8, "建设用地"], [9, "湿地"]
+    ];
+    // 固定同一地理范围，确保所有缩略图可以逐年对比。
+    const comparisonBounds = [[24.82, 102.66], [25.15, 103.03]];
+
+    function setOptions(select, years, selected) {
+      select.replaceChildren();
+      for (const year of years) {
+        const option = document.createElement("option");
+        option.value = String(year);
+        option.textContent = String(year);
+        select.append(option);
+      }
+      select.value = String(selected);
+    }
+
+    async function jsonFrom(url) {
+      const response = await fetch(url);
+      const body = await response.json();
+      if (!response.ok) throw new Error(typeof body.detail === "string" ? body.detail : "请求失败");
+      return body;
+    }
+
+    async function loadMapColors(year) {
+      const data = await jsonFrom(`${API}/api/map/colors?year=${year}`);
+      if (!Array.isArray(data.classes) || data.classes.length !== 9) {
+        throw new Error("地图样式未提供完整的九类颜色");
+      }
+      classColors = new Map(data.classes.map(item => [item.class_code, item.color_hex]));
+      const legend = byId("map-legend");
+      legend.replaceChildren();
+      for (const item of data.classes) {
+        const label = document.createElement("span");
+        label.className = "map-legend-item";
+        const swatch = document.createElement("span");
+        swatch.className = "map-swatch";
+        swatch.style.backgroundColor = item.color_hex;
+        label.append(swatch, document.createTextNode(item.class_name));
+        legend.append(label);
+      }
+    }
+
+    function colorFor(code) {
+      const color = classColors.get(Number(code));
+      if (!color) throw new Error(`地图样式缺少地类 ${code} 的颜色`);
+      return color;
+    }
+
+    async function submitQuestion(event) {
+      event.preventDefault();
+      const button = byId("ask-button");
+      const status = byId("ask-status");
+      button.disabled = true;
+      status.classList.remove("error");
+      status.textContent = "正在查询……";
+      byId("answer").hidden = true;
+      byId("answer").textContent = "";
+      latestPeriodComparison = null;
+      try {
+        const response = await fetch(`${API}/api/agent-full/ask`, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({question: byId("question").value.trim()})
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(typeof result.detail === "string" ? result.detail : "问答接口请求失败");
+        }
+        const query = result.query;
+        latestPeriodComparison = query?.chart_mode === "periodcompare" ? {
+          rows: query.comparison_periods, label: query.comparison_label,
+          kind: query.comparison_kind || "transition"
+        } : null;
+        if (query) {
+          startInput.value = String(query.start_year);
+          endInput.value = String(query.end_year);
+          byId("min-patch").value = String(query.min_patch_km2 ?? 0);
+          const selected = new Set(query.class_codes);
+          for (const checkbox of byId("class-choices").querySelectorAll("input")) {
+            checkbox.checked = selected.has(Number(checkbox.value));
+          }
+          byId("chart-mode").value = query.chart_mode === "annual" ? "auto" : query.chart_mode;
+        }
+        const docSources = (result.evidence?.documents || [])
+          .map(item => item.source).filter((value, index, array) => array.indexOf(value) === index);
+        const classNames = {1: "耕地", 2: "林地", 3: "灌丛", 4: "草地", 5: "水体",
+          6: "积雪／冰川", 7: "裸地", 8: "建设用地", 9: "湿地"};
+        const graphPaths = (result.evidence?.graph_paths || []).slice(0, 3).map(path => {
+          const observations = path.observations || [];
+          const transitions = path.transitions || [];
+          return transitions.map((step, index) => {
+            const from = observations[index], to = observations[index + 1];
+            return `${from.year}年${classNames[from.class_code] || from.class_code}→` +
+              `${to.year}年${classNames[to.class_code] || to.class_code} ${Number(step.area_km2).toFixed(4)} km²`;
+          }).join("；");
+        });
+        byId("answer").textContent = result.answer +
+          (docSources.length ? `\n\n检索到的文本来源：${docSources.join("、")}` : "") +
+          (graphPaths.length ? `\n图谱关系（两跳不代表同一像元轨迹）：${graphPaths.join("；")}` : "");
+        byId("answer").hidden = false;
+        if (query) await queryMaps();
+        status.textContent = "";
+      } catch (error) {
+        status.textContent = `问答失败：${error.message}`;
+        status.classList.add("error");
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    function showYear(year) {
+      if (!currentQuery) return;
+      const entry = currentQuery.annual_layers.find(item => item.year === year);
+      if (!entry) return;
+      if (annualLayer) map.removeLayer(annualLayer);
+      annualLayer = L.tileLayer(entry.tile_url, {
+        tileSize: 256,
+        opacity: 0.82,
+        attribution: "CLCD / GeoServer"
+      }).addTo(map);
+      annualLayer.on("tileerror", () => {
+        mapStatus.textContent = "地图图片加载失败：请检查 GeoServer 是否运行，以及年度图层是否已发布。";
+        mapStatus.classList.add("error");
+      });
+      mapYearInput.value = String(year);
+      for (const card of byId("year-grid").children) {
+        card.classList.toggle("active", Number(card.dataset.year) === year);
+      }
+      mapStatus.classList.remove("error");
+      mapStatus.textContent = `当前显示 ${year} 年地图。点击官渡区内任意位置查看地类历史。`;
+      // 高亮图层始终放在年度底图上方。
+      if (changeLayer && map.hasLayer(changeLayer)) changeLayer.bringToFront();
+    }
+
+    async function switchMapYear(year) {
+      try {
+        await loadMapColors(year);
+        showYear(year);
+        await refreshCharts();
+      } catch (error) {
+        mapStatus.textContent = `切换地图年份失败：${error.message}`;
+        mapStatus.classList.add("error");
+      }
+    }
+
+    function drawYearGrid(entries) {
+      const container = byId("year-grid");
+      container.replaceChildren();
+      const southwest = L.CRS.EPSG3857.project(L.latLng(comparisonBounds[0]));
+      const northeast = L.CRS.EPSG3857.project(L.latLng(comparisonBounds[1]));
+      const bbox = [southwest.x, southwest.y, northeast.x, northeast.y].join(",");
+      for (const entry of entries) {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "year-card";
+        card.dataset.year = String(entry.year);
+        card.title = `查看 ${entry.year} 年大地图`;
+        const params = new URLSearchParams({
+          SERVICE: "WMS", VERSION: "1.1.1", REQUEST: "GetMap",
+          LAYERS: entry.name, STYLES: "", FORMAT: "image/png",
+          TRANSPARENT: "true", SRS: "EPSG:3857",
+          BBOX: bbox, WIDTH: "320", HEIGHT: "240"
+        });
+        const thumbnail = document.createElement("img");
+        thumbnail.loading = "lazy";
+        thumbnail.alt = `${entry.year} 年土地覆盖地图`;
+        thumbnail.src = entry.preview_url;
+        thumbnail.addEventListener("error", () => {
+          thumbnail.alt = `${entry.year} 年地图图片加载失败，请检查 GeoServer`;
+        });
+        const caption = document.createElement("span");
+        caption.textContent = `${entry.year} 年`;
+        card.append(thumbnail, caption);
+        card.addEventListener("click", async () => {
+          await switchMapYear(entry.year);
+          map.getContainer().scrollIntoView({behavior: "smooth", block: "center"});
+        });
+        container.append(card);
+      }
+    }
+
+    function refreshChangeLayer() {
+      if (changeLayer) {
+        map.removeLayer(changeLayer);
+        changeLayer = null;
+      }
+      if (!currentQuery || !changeToggle.checked || !currentQuery.change_layer) return;
+      const entry = currentQuery.change_layer;
+      const selected = [...byId("class-choices").querySelectorAll("input:checked")]
+        .map(input => input.value);
+      if (!selected.length) {
+        mapStatus.textContent = "请至少勾选一个地类后再显示变化高亮。";
+        return;
+      }
+      const threshold = Number(byId("min-patch").value);
+      if (!Number.isFinite(threshold) || threshold < 0 || threshold > 100) {
+        mapStatus.textContent = "变化斑块面积阈值须在 0–100 km² 之间。";
+        return;
+      }
+      const tileParams = new URLSearchParams({
+        class_codes: selected.join(","), min_patch_km2: threshold
+      });
+      changeLayer = L.tileLayer(`${entry.tile_url}?${tileParams}`, {
+        opacity: 0.8,
+        maxZoom: 19,
+        attribution: "官渡区地类转换（转入类型着色）"
+      }).addTo(map);
+      changeLayer.on("tileerror", () => {
+        mapStatus.textContent = "变化瓦片加载失败：请检查 FastAPI 终端是否有栅格读取错误。";
+        mapStatus.classList.add("error");
+      });
+      changeLayer.bringToFront();
+    }
+
+    async function queryMaps() {
+      const startYear = Number(startInput.value);
+      const endYear = Number(endInput.value);
+      if (endYear < startYear) {
+        queryStatus.textContent = "结束年份不能早于起始年份。";
+        queryStatus.classList.add("error");
+        return;
+      }
+      byId("query-button").disabled = true;
+      queryStatus.classList.remove("error");
+      queryStatus.textContent = "正在查询……";
+      try {
+        const params = new URLSearchParams({start_year: startYear, end_year: endYear});
+        const data = await jsonFrom(`${API}/api/maps?${params}`);
+        await loadMapColors(startYear);
+        currentQuery = data;
+        setOptions(mapYearInput, data.years, startYear);
+        drawYearGrid(data.annual_layers);
+        const periodComparison = byId("chart-mode").value === "periodcompare" && latestPeriodComparison;
+        changeToggle.disabled = !data.change_layer || Boolean(periodComparison);
+        changeToggle.checked = false;
+        byId("change-label").textContent = periodComparison
+          ? "两个独立区间的转移比较：此处不显示跨两区间的合并高亮"
+          : data.change_layer
+          ? `显示 ${startYear}–${endYear} 年所选地类变化高亮`
+          : "单一年份没有地类转换高亮";
+        refreshChangeLayer();
+        showYear(startYear);
+        await refreshCharts();
+        await refreshGraph();
+        queryStatus.textContent = "";
+      } catch (error) {
+        queryStatus.textContent = `查询失败：${error.message}。请检查 8001 端口上的 FastAPI 服务。`;
+        queryStatus.classList.add("error");
+      } finally {
+        byId("query-button").disabled = false;
+      }
+    }
+
+    function chartContainer(parent = byId("chart-grid"), height = 430) {
+      const box = document.createElement("div");
+      box.className = "chart-box";
+      box.style.height = `${height}px`;
+      parent.append(box);
+      const chart = echarts.init(box);
+      chartInstances.push(chart);
+      requestAnimationFrame(() => chart.resize());
+      return chart;
+    }
+
+    function chartPair(heading) {
+      const title = document.createElement("h3");
+      title.className = "chart-group-title";
+      title.textContent = heading;
+      const pair = document.createElement("div");
+      pair.className = "chart-pair";
+      byId("chart-grid").append(title, pair);
+      return pair;
+    }
+
+    function clearCharts() {
+      for (const chart of chartInstances) chart.dispose();
+      chartInstances = [];
+      byId("chart-grid").replaceChildren();
+    }
+
+    function areaBar(annual, selectedCodes, parent) {
+      const selected = annual.classes.filter(item => selectedCodes.includes(item.class_code));
+      chartContainer(parent).setOption({
+        title: {text: `${annual.year} 年所选地类面积`, left: "center", textStyle: {fontSize: 15}},
+        tooltip: {trigger: "axis"},
+        grid: {left: 65, right: 25, top: 60, bottom: 100},
+        xAxis: {type: "category", data: selected.map(item => item.class_name),
+                axisLabel: {interval: 0, rotate: 45,
+                  formatter: value => value.length > 7 ? value.slice(0, 7) + "…" : value}},
+        yAxis: {type: "value", name: "km²"},
+        series: [{type: "bar", barMaxWidth: 58, data: selected.map(item => ({
+          value: item.area_km2, itemStyle: {color: colorFor(item.class_code)}
+        }))}]
+      });
+    }
+
+    function areaPie(annual, selectedCodes, parent) {
+      const selected = annual.classes.filter(item => selectedCodes.includes(item.class_code));
+      const otherArea = annual.classes
+        .filter(item => !selectedCodes.includes(item.class_code))
+        .reduce((sum, item) => sum + item.area_km2, 0);
+      const slices = selected.map(item => ({
+        name: item.class_name, value: item.area_km2,
+        itemStyle: {color: colorFor(item.class_code)}
+      }));
+      if (otherArea > 0) {
+        slices.push({name: "其他地类", value: Number(otherArea.toFixed(4)),
+                     itemStyle: {color: "#b9c5bd"}});
+      }
+      chartContainer(parent).setOption({
+        title: {text: `${annual.year} 年所选地类占全区比例`, left: "center", textStyle: {fontSize: 15}},
+        tooltip: {trigger: "item", formatter: "{b}: {c} km² ({d}%)"},
+        legend: {type: "scroll", bottom: 5},
+        series: [{type: "pie", radius: ["30%", "62%"], center: ["50%", "49%"],
+          data: slices}]
+      });
+    }
+
+    function trendCharts(result) {
+      const years = result.years.map(String);
+      const series = result.series;
+      const common = {
+        tooltip: {trigger: "axis"},
+        legend: {type: "scroll", top: 30},
+        grid: {left: 70, right: 35, top: 85, bottom: 95},
+        xAxis: {type: "category", data: years,
+                axisLabel: {interval: years.length > 20 ? 4 : years.length > 10 ? 1 : 0, rotate: 45}},
+        yAxis: {type: "value", name: "km²"},
+        dataZoom: [{type: "slider", bottom: 15, height: 20}, {type: "inside"}]
+      };
+      chartContainer().setOption({
+        ...common,
+        title: {text: "逐年地类面积（柱状图）", left: "center", textStyle: {fontSize: 15}},
+        series: series.map(item => ({
+          name: item.class_name, type: "bar", stack: series.length > 1 ? "area" : undefined,
+          itemStyle: {color: colorFor(item.class_code)},
+          data: item.data.map(point => point.area_km2)
+        }))
+      });
+      chartContainer().setOption({
+        ...common,
+        title: {text: "逐年地类面积趋势（折线图）", left: "center", textStyle: {fontSize: 15}},
+        series: series.map(item => ({
+          name: item.class_name, type: "line", smooth: false, symbolSize: 5,
+          itemStyle: {color: colorFor(item.class_code)},
+          data: item.data.map(point => point.area_km2)
+        }))
+      });
+    }
+
+    function netChangeCharts(result) {
+      const years = result.data.map(item => String(item.year));
+      const values = result.data.map(item => item.net_change_km2);
+      const common = {
+        tooltip: {trigger: "axis", valueFormatter: value => `${Number(value) >= 0 ? "+" : ""}${Number(value).toFixed(4)} km²`},
+        grid: {left: 75, right: 35, top: 65, bottom: 95},
+        xAxis: {type: "category", name: "年份", data: years,
+          axisLabel: {interval: years.length > 20 ? 4 : years.length > 10 ? 1 : 0, rotate: 45}},
+        yAxis: {type: "value", name: "净变化 km²"},
+        dataZoom: [{type: "slider", bottom: 15, height: 20}, {type: "inside"}]
+      };
+      chartContainer().setOption({
+        ...common,
+        title: {text: `${result.class_name}逐年净增减面积（柱状图）`, left: "center", textStyle: {fontSize: 15}},
+        series: [{
+          name: result.class_name, type: "bar", barMaxWidth: 35,
+          data: values.map(value => ({
+            value,
+            itemStyle: {color: colorFor(result.class_code)}
+          })),
+          markLine: {silent: true, symbol: "none", label: {show: false},
+            lineStyle: {color: "#74847d"}, data: [{yAxis: 0}]}
+        }]
+      });
+      chartContainer().setOption({
+        ...common,
+        title: {text: `${result.class_name}逐年净增减趋势（折线图）`, left: "center", textStyle: {fontSize: 15}},
+        series: [{
+          name: result.class_name, type: "line", data: values, symbolSize: 6,
+          itemStyle: {color: colorFor(result.class_code)},
+          markLine: {silent: true, symbol: "none", label: {show: false},
+            lineStyle: {color: "#74847d"}, data: [{yAxis: 0}]}
+        }]
+      });
+    }
+
+    function transitionCharts(result, selectedCodes) {
+      const flows = result.flows.filter(item => item.area_km2 > 0 &&
+        (selectedCodes.includes(item.from_code) || selectedCodes.includes(item.to_code)));
+      if (!flows.length) {
+        const notice = document.createElement("p");
+        notice.textContent = "所选地类在这一对年份间没有发生类型转换。";
+        byId("chart-grid").append(notice);
+      } else {
+      const outgoing = new Map(), incoming = new Map();
+      for (const flow of flows) {
+        outgoing.set(flow.from_code, flow.from_name);
+        incoming.set(flow.to_code, flow.to_name);
+      }
+      const nodes = [
+        ...[...outgoing].map(([code, name]) => ({name: `转出·${code}·${name}`, depth: 0,
+          itemStyle: {color: colorFor(code)}})),
+        ...[...incoming].map(([code, name]) => ({name: `转入·${code}·${name}`, depth: 1,
+          itemStyle: {color: colorFor(code)}}))
+      ];
+      chartContainer(undefined, 560).setOption({
+        title: {text: `${result.start_year}–${result.end_year} 年地类转换桑基图`,
+          subtext: "仅包含发生转换的像元，连线宽度表示面积", left: "center",
+          textStyle: {fontSize: 16}},
+        tooltip: {trigger: "item", formatter: param => param.dataType === "edge"
+          ? `${param.data.from_name} → ${param.data.to_name}: ${param.value.toFixed(4)} km²`
+          : param.name.split("·").slice(2).join("·")},
+        series: [{
+          type: "sankey", left: 40, right: 150, top: 85, bottom: 25,
+          nodeWidth: 18, nodeGap: 9, layoutIterations: 32,
+          emphasis: {focus: "adjacency"},
+          data: nodes,
+          links: flows.map(flow => ({
+            source: `转出·${flow.from_code}·${flow.from_name}`,
+            target: `转入·${flow.to_code}·${flow.to_name}`,
+            value: flow.area_km2,
+            from_name: flow.from_name, to_name: flow.to_name
+          })),
+          label: {formatter: param => param.name.split("·").slice(2).join("·")},
+          lineStyle: {color: "gradient", curveness: 0.5, opacity: 0.45}
+        }]
+      });
+
+      const biggest = [...flows].sort((a, b) => b.area_km2 - a.area_km2).slice(0, 12);
+      chartContainer(undefined, 570).setOption({
+        title: {text: "面积最大的 12 种地类转换", left: "center", textStyle: {fontSize: 16}},
+        tooltip: {trigger: "axis", axisPointer: {type: "shadow"},
+          valueFormatter: value => `${Number(value).toFixed(4)} km²`},
+        grid: {left: 150, right: 85, top: 60, bottom: 40},
+        xAxis: {type: "value", name: "km²"},
+        yAxis: {type: "category", inverse: true,
+          data: biggest.map(flow => `${flow.from_name}→${flow.to_name}`)},
+        series: [{type: "bar", barMaxWidth: 25,
+          data: biggest.map(flow => ({value: flow.area_km2,
+            itemStyle: {color: colorFor(flow.to_code)}}))}]
+      });
+      }
+
+      const lookup = new Map(result.matrix.map(item => [`${item.from_code}-${item.to_code}`, item]));
+      const names = new Map(result.matrix.map(item => [item.from_code, item.from_name]));
+      const table = document.createElement("table");
+      table.className = "matrix-table";
+      const caption = document.createElement("caption");
+      caption.textContent = "9×9 转移矩阵（km²）：仅显示与所选地类有关的行或列；灰色对角线为未转换，“—”为其他地类关系";
+      table.append(caption);
+      const head = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      for (const label of ["转出 ↓ / 转入 →", ...[...names.values()]]) {
+        const cell = document.createElement("th");
+        cell.textContent = label;
+        headerRow.append(cell);
+      }
+      head.append(headerRow);
+      table.append(head);
+      const body = document.createElement("tbody");
+      for (const [fromCode, fromName] of names) {
+        const row = document.createElement("tr");
+        const label = document.createElement("th");
+        label.scope = "row";
+        label.textContent = fromName;
+        row.append(label);
+        for (const toCode of names.keys()) {
+          const item = lookup.get(`${fromCode}-${toCode}`);
+          const cell = document.createElement("td");
+          cell.textContent = selectedCodes.includes(fromCode) || selectedCodes.includes(toCode)
+            ? item.area_km2.toFixed(4) : "—";
+          cell.className = fromCode === toCode ? "same" : "changed";
+          row.append(cell);
+        }
+        body.append(row);
+      }
+      table.append(body);
+      const wrap = document.createElement("div");
+      wrap.className = "matrix-wrap";
+      wrap.append(table);
+      byId("chart-grid").append(wrap);
+    }
+
+    function changedAreaCharts(result, selectedCodes) {
+      const rows = result.classes.filter(item => selectedCodes.includes(item.class_code));
+      const names = rows.map(item => item.class_name);
+      chartContainer().setOption({
+        title: {text: "变化区域内各地类转入与转出面积", left: "center", textStyle: {fontSize: 16}},
+        tooltip: {trigger: "axis"},
+        legend: {top: 35},
+        grid: {left: 70, right: 30, top: 78, bottom: 100},
+        xAxis: {type: "category", data: names, axisLabel: {rotate: 40, interval: 0}},
+        yAxis: {type: "value", name: "km²"},
+        series: [
+          {name: "转入", type: "bar", data: rows.map(item => ({value: item.incoming_area_km2,
+            itemStyle: {color: colorFor(item.class_code)}}))},
+          {name: "转出", type: "bar", data: rows.map(item => ({value: item.outgoing_area_km2,
+            itemStyle: {color: colorFor(item.class_code), opacity: 0.5}}))}
+        ]
+      });
+      chartContainer().setOption({
+        title: {text: "变化区域内各地类净增减面积", left: "center", textStyle: {fontSize: 16}},
+        tooltip: {trigger: "axis", valueFormatter: value => `${Number(value).toFixed(4)} km²`},
+        grid: {left: 70, right: 30, top: 65, bottom: 100},
+        xAxis: {type: "category", data: names, axisLabel: {rotate: 40, interval: 0}},
+        yAxis: {type: "value", name: "km²"},
+        series: [{type: "bar", data: rows.map(item => ({
+          value: item.net_change_km2,
+          itemStyle: {color: colorFor(item.class_code)}
+        })),
+          markLine: {silent: true, symbol: "none", label: {show: false}, data: [{yAxis: 0}]}}]
+      });
+    }
+
+    async function refreshGraph() {
+      if (!currentQuery || typeof echarts === "undefined") return;
+      const status = byId("graph-status");
+      const task = ++graphRequestNumber;
+      const selected = [...byId("class-choices").querySelectorAll("input:checked")]
+        .map(input => input.value);
+      if (!graphInstance) graphInstance = echarts.init(byId("graph-chart"));
+      graphInstance.clear();
+      if (!selected.length) {
+        status.textContent = "请至少勾选一个地类。";
+        return;
+      }
+      status.classList.remove("error");
+      status.textContent = "正在读取 Neo4j 局部图谱……";
+      try {
+        const params = new URLSearchParams({
+          start_year: currentQuery.start_year,
+          end_year: currentQuery.end_year,
+          class_codes: selected.join(",")
+        });
+        const result = await jsonFrom(`${API}/api/graph?${params}`);
+        if (task !== graphRequestNumber) return;
+        graphInstance.setOption({
+          tooltip: {formatter: item => item.dataType === "edge"
+            ? `${item.data.label}：${item.data.value.toFixed(4)} km²`
+            : item.data.name},
+          legend: [{data: ["研究区", "地类", "转出地类", "转入地类"]}],
+          series: [{
+            type: "graph", layout: "force", roam: true, draggable: true,
+            force: {repulsion: 550, edgeLength: [100, 210], gravity: 0.09},
+            categories: [
+              {name: "研究区", itemStyle: {color: "#155e4b"}},
+              {name: "地类", itemStyle: {color: "#dcab48"}},
+              {name: "转出地类", itemStyle: {color: "#558a72"}},
+              {name: "转入地类", itemStyle: {color: "#cc755d"}}
+            ],
+            data: result.nodes.map(node => ({
+              id: node.id, name: node.name,
+              category: ({region: 0, class: 1, from: 2, to: 3})[node.kind],
+              symbolSize: node.kind === "region" ? 70 : 42,
+              itemStyle: node.class_code ? {color: colorFor(node.class_code)} : undefined,
+              label: {show: true, position: "right"}
+            })),
+            links: result.links.map(link => ({
+              source: link.source, target: link.target,
+              value: link.value, label: link.label,
+              lineStyle: {width: Math.min(8, 1 + Math.sqrt(link.value) / 3),
+                opacity: 0.5, curveness: 0.12}
+            })),
+            edgeSymbol: ["none", "arrow"], edgeSymbolSize: [0, 7],
+            emphasis: {focus: "adjacency"}
+          }]
+        }, true);
+        graphInstance.resize();
+        status.textContent = result.scope === "single_year_area"
+          ? `${result.start_year} 年：官渡区与所选地类的观测关系。`
+          : `${result.start_year}–${result.end_year} 年：相邻年份转换关系累计；不等于起止年转移矩阵。`;
+      } catch (error) {
+        if (task !== graphRequestNumber) return;
+        status.textContent = `知识图谱尚不可用：${error.message}`;
+        status.classList.add("error");
+      }
+    }
+
+    async function refreshCharts() {
+      const status = byId("chart-status");
+      const task = ++chartRequestNumber;
+      clearCharts();
+      if (!currentQuery) return;
+      if (typeof echarts === "undefined") {
+        status.textContent = "图表库未加载；请检查浏览器能否访问 cdn.jsdelivr.net。";
+        status.classList.add("error");
+        return;
+      }
+      const start = currentQuery.start_year;
+      const end = currentQuery.end_year;
+      let mode = byId("chart-mode").value;
+      if (start === end && !["netchange", "transition"].includes(mode)) mode = "annual";
+      else if (mode === "auto") mode = end === start + 1 ? "compare" : "timeseries";
+      const selected = [...byId("class-choices").querySelectorAll("input:checked")]
+        .map(input => Number(input.value));
+      status.classList.remove("error");
+      status.textContent = "正在读取统计数据……";
+      try {
+        if (!selected.length) throw new Error("请至少勾选一个地类");
+        if (mode === "periodcompare") {
+          if (!latestPeriodComparison?.rows || latestPeriodComparison.rows.length < 2) {
+            throw new Error("请先提问两个或更多年份区间的转移量比较问题");
+          }
+          const {rows, label, kind} = latestPeriodComparison;
+          chartContainer().setOption({
+            title: {text: `${label}：并排比较`, left: "center", textStyle: {fontSize: 16}},
+            tooltip: {trigger: "axis", valueFormatter: value => `${Number(value).toFixed(4)} km²`},
+            grid: {left: 75, right: 35, top: 70, bottom: 55},
+            xAxis: {type: "category", data: rows.map(item =>
+              item.start_year === item.end_year
+                ? `${item.start_year}年 ${item.label || label}`
+                : `${item.start_year}→${item.end_year} ${item.label || label}`)},
+            yAxis: {type: "value", name: "km²"},
+            series: [{type: "bar", barMaxWidth: 110,
+              data: rows.map(item => ({value: item.area_km2,
+                itemStyle: {color: colorFor(item.from_code || selected[0])}}))}]
+          });
+          status.textContent = kind === "annual_area"
+            ? `${label}按各自年度 CLCD 面积统计。`
+            : `${label}按各自起止年转移矩阵统计；每根柱对应一个比较对象。`;
+        } else if (mode === "annual") {
+          const annual = await jsonFrom(`${API}/api/stats/annual?year=${start}`);
+          if (task !== chartRequestNumber) return;
+          areaBar(annual, selected);
+          areaPie(annual, selected);
+          status.textContent = `${start} 年所选地类面积和占全区比例。`;
+        } else if (mode === "compare") {
+          const params = new URLSearchParams({start_year: start, end_year: end});
+          const result = await jsonFrom(`${API}/api/stats/compare?${params}`);
+          if (task !== chartRequestNumber) return;
+          const bars = chartPair("面积柱状图：两年并排");
+          areaBar(result.start, selected, bars);
+          areaBar(result.end, selected, bars);
+          const pies = chartPair("占比饼图：两年并排");
+          areaPie(result.start, selected, pies);
+          areaPie(result.end, selected, pies);
+          status.textContent = `${start} 与 ${end} 年所选地类对比；饼图中的“其他地类”为未勾选地类合计。`;
+        } else if (mode === "netchange") {
+          if (start === end) throw new Error("净变化查询需要至少两个年份");
+          if (selected.length !== 1) throw new Error("净变化查询只能勾选一个地类");
+          const params = new URLSearchParams({
+            start_year: start, end_year: end, class_code: selected[0]
+          });
+          const result = await jsonFrom(`${API}/api/stats/net-change?${params}`);
+          if (task !== chartRequestNumber) return;
+          netChangeCharts(result);
+          status.textContent = `${result.class_name}从 ${start} 到 ${end} 年：每根柱对应本年面积减去上一年面积；正值为增加，负值为减少。首个数据年份为 ${start + 1} 年。`;
+        } else if (mode === "transition") {
+          if (start === end) throw new Error("转移矩阵需要两个不同年份");
+          const params = new URLSearchParams({start_year: start, end_year: end});
+          const result = await jsonFrom(`${API}/api/stats/transitions?${params}`);
+          if (task !== chartRequestNumber) return;
+          transitionCharts(result, selected);
+          const selectedPixels = result.flows
+            .filter(item => selected.includes(item.from_code) || selected.includes(item.to_code))
+            .reduce((sum, item) => sum + item.pixel_count, 0);
+          status.textContent = `${start}–${end} 年：全区变化 ${result.changed_pixel_count} 像元（${result.changed_area_km2} km²）；其中涉及所选地类 ${selectedPixels} 像元（${(selectedPixels * .0009).toFixed(4)} km²）。`;
+        } else if (mode === "changedareas") {
+          if (start === end) throw new Error("变化区域统计需要两个不同年份");
+          const threshold = Number(byId("min-patch").value);
+          if (!Number.isFinite(threshold) || threshold < 0 || threshold > 100) {
+            throw new Error("变化斑块面积阈值须在 0–100 km² 之间");
+          }
+          const params = new URLSearchParams({
+            start_year: start, end_year: end, min_patch_km2: threshold
+          });
+          const result = await jsonFrom(`${API}/api/stats/changed-areas?${params}`);
+          if (task !== chartRequestNumber) return;
+          changedAreaCharts(result, selected);
+          status.textContent = `${start}–${end} 年：阈值 ${threshold} km²，${result.patch_count == null ? "斑块数量未计算" : `共 ${result.patch_count} 个斑块`}；筛出 ${result.changed_pixel_count} 个变化像元（${result.changed_area_km2} km²）。`;
+        } else {
+          const params = new URLSearchParams({
+            start_year: start, end_year: end, class_codes: selected.join(",")
+          });
+          const result = await jsonFrom(`${API}/api/stats/timeseries?${params}`);
+          if (task !== chartRequestNumber) return;
+          trendCharts(result);
+          status.textContent = `${start}–${end} 年：${result.series.map(item => item.class_name).join("、")}面积逐年变化。`;
+        }
+      } catch (error) {
+        if (task !== chartRequestNumber) return;
+        status.textContent = `统计图表加载失败：${error.message}`;
+        status.classList.add("error");
+      }
+    }
+
+    async function onMapClick(event) {
+      if (!currentQuery) return;
+      const myRequest = ++requestNumber;
+      const {lat, lng} = event.latlng;
+      const popup = L.popup().setLatLng(event.latlng).setContent("正在查询此位置的历年地类……").openOn(map);
+      const params = new URLSearchParams({
+        lon: lng.toFixed(8),
+        lat: lat.toFixed(8),
+        start_year: currentQuery.start_year,
+        end_year: currentQuery.end_year
+      });
+      try {
+        const data = await jsonFrom(`${API}/api/point-history?${params}`);
+        if (myRequest !== requestNumber) return;
+        const container = document.createElement("div");
+        const title = document.createElement("div");
+        title.className = "popup-title";
+        title.textContent = `位置：${lat.toFixed(5)}°N, ${lng.toFixed(5)}°E`;
+        container.append(title);
+        const list = document.createElement("ol");
+        list.className = "popup-years";
+        for (const item of data.history) {
+          const row = document.createElement("li");
+          row.textContent = `${item.year} 年：${item.class_name}`;
+          list.append(row);
+        }
+        container.append(list);
+        const change = document.createElement("div");
+        const selected = [...byId("class-choices").querySelectorAll("input:checked")]
+          .map(input => Number(input.value));
+        const related = data.changes.filter(item =>
+          selected.includes(item.from_code) || selected.includes(item.to_code));
+        change.textContent = related.length
+          ? `涉及所选地类的转换：${related.map(item => `${item.from_year}→${item.to_year} ${item.from_name}→${item.to_name}`).join("；")}`
+          : "查询期间该点没有涉及所选地类的逐年转换。";
+        container.append(change);
+        popup.setContent(container).update();
+      } catch (error) {
+        if (myRequest === requestNumber) popup.setContent(`点位查询失败：${error.message}`).update();
+      }
+    }
+
+    async function start() {
+      if (typeof L === "undefined") {
+        mapStatus.textContent = "Leaflet 地图库未加载；请检查网络是否能访问 unpkg.com。";
+        mapStatus.classList.add("error");
+        return;
+      }
+      map = L.map("map").setView([25.04749259, 102.82251684], 11);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors"
+      }).addTo(map);
+      map.on("click", onMapClick);
+      byId("query-button").addEventListener("click", queryMaps);
+      byId("ask-form").addEventListener("submit", submitQuestion);
+      byId("chart-mode").addEventListener("change", refreshCharts);
+      window.addEventListener("resize", () => {
+        chartInstances.forEach(chart => chart.resize());
+        if (graphInstance) graphInstance.resize();
+      });
+      mapYearInput.addEventListener("change", () => switchMapYear(Number(mapYearInput.value)));
+      changeToggle.addEventListener("change", refreshChangeLayer);
+      byId("min-patch").addEventListener("change", () => {
+        if (changeToggle.checked) refreshChangeLayer();
+        if (byId("chart-mode").value === "changedareas") refreshCharts();
+      });
+      for (const [code, name] of classes) {
+        const label = document.createElement("label");
+        const box = document.createElement("input");
+        box.type = "checkbox";
+        box.value = String(code);
+        box.checked = [1, 2, 8].includes(code);
+        box.addEventListener("change", () => {
+          refreshCharts();
+          refreshGraph();
+          if (changeToggle.checked) refreshChangeLayer();
+        });
+        label.append(box, document.createTextNode(name));
+        byId("class-choices").append(label);
+      }
+      try {
+        const data = await jsonFrom(`${API}/api/years`);
+        setOptions(startInput, data.years, 2010);
+        setOptions(endInput, data.years, 2020);
+        await queryMaps();
+      } catch (error) {
+        mapStatus.textContent = `初始化失败：${error.message}。请检查 FastAPI 是否在 8001 端口运行。`;
+        mapStatus.classList.add("error");
+      }
+    }
+    start();
+  </script>
+</body>
+</html>

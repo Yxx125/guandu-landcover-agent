@@ -1,0 +1,192 @@
+name: guandu-landcover
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./webgis_system/sql/docker-init:/docker-entrypoint-initdb.d:ro
+      - ./3_output/statistics:/import:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks: [internal]
+
+  neo4j:
+    image: neo4j:5-community
+    restart: unless-stopped
+    environment:
+      NEO4J_AUTH: ${NEO4J_USER}/${NEO4J_PASSWORD}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+      TZ: Asia/Shanghai
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:7474 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 30
+    networks: [internal]
+
+  geoserver:
+    image: ${GEOSERVER_IMAGE}
+    restart: unless-stopped
+    environment:
+      GEOSERVER_ADMIN_USER: ${GEOSERVER_ADMIN_USER}
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD}
+      TZ: Asia/Shanghai
+    volumes:
+      - geoserver_data:/opt/geoserver/data_dir
+      - web_raster_data:/data/web_data:ro
+      - ./webgis_system/styles:/data/styles:ro
+    networks: [internal]
+
+  geoserver-init:
+    build: ./webgis_system
+    restart: "no"
+    command: python scripts/docker_init_geoserver.py
+    environment:
+      GEOSERVER_INTERNAL_URL: http://geoserver:8080/geoserver
+      GEOSERVER_ADMIN_USER: ${GEOSERVER_ADMIN_USER}
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD}
+      GEOSERVER_RASTER_DIR: /data/web_data
+      GEOSERVER_STYLE_DIR: /data/styles
+    volumes:
+      - web_raster_data:/data/web_data:ro
+      - ./webgis_system/styles:/data/styles:ro
+    depends_on:
+      geoserver:
+        condition: service_started
+    networks: [internal]
+
+  backend:
+    build: ./webgis_system
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      APP_ENV: production
+      TZ: Asia/Shanghai
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      GEOSERVER_INTERNAL_URL: http://geoserver:8080/geoserver
+      GEOSERVER_PUBLIC_URL: /geoserver
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: ${NEO4J_USER}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+      NEO4J_DATABASE: neo4j
+      USE_LOCAL_OLLAMA: ${USE_LOCAL_OLLAMA}
+      MODEL_API_BASE_URL: ${MODEL_API_BASE_URL}
+      MODEL_API_KEY: ${MODEL_API_KEY}
+      MODEL_NAME: ${MODEL_NAME}
+      OLLAMA_CHAT_URL: http://ollama:11434/api/chat
+      OLLAMA_MODEL: ${OLLAMA_MODEL}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL}
+      CLCD_DIR: /data/clcd_guandu
+      CHROMA_DIR: /app/data/chroma
+      DOCUMENTS_DIR: /app/documents
+    volumes:
+      - clcd_data:/data/clcd_guandu:ro
+      - ./webgis_system/documents:/app/documents:ro
+      - chroma_data:/app/data/chroma
+      - model_cache:/home/appuser/.cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+      geoserver-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://127.0.0.1:8001/health/live || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+    networks: [internal]
+
+  graph-init:
+    build: ./webgis_system
+    restart: "no"
+    command: python scripts/build_knowledge_graph.py
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: ${NEO4J_USER}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+      NEO4J_DATABASE: neo4j
+      CLCD_DIR: /data/clcd_guandu
+    volumes:
+      - clcd_data:/data/clcd_guandu:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+    networks: [internal]
+
+  document-index-init:
+    build: ./webgis_system
+    restart: "no"
+    command: python scripts/index_documents.py
+    environment:
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL}
+      CHROMA_DIR: /app/data/chroma
+      DOCUMENTS_DIR: /app/documents
+    volumes:
+      - ./webgis_system/documents:/app/documents:ro
+      - chroma_data:/app/data/chroma
+      - model_cache:/home/appuser/.cache
+    networks: [internal]
+
+  frontend:
+    build: ./webgis_system/web
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8088}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [internal]
+
+  ollama:
+    image: ollama/ollama:latest
+    profiles: [local-model]
+    restart: unless-stopped
+    volumes:
+      - ollama_data:/root/.ollama
+    networks: [internal]
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  neo4j_data:
+  neo4j_logs:
+  geoserver_data:
+  chroma_data:
+  model_cache:
+  web_raster_data:
+    name: guandu-landcover_web_raster_data
+  clcd_data:
+    name: guandu-landcover_clcd_data
+  ollama_data:

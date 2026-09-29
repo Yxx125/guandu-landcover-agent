@@ -216,3 +216,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Guandu WebGIS generated/runtime data and large source files
+3_output/
+1_yunnan_clcd/
+2_work/
+*.qgz
+*.pdf
+*.docx
+webgis_system/data/
+webgis_system/logs/
+webgis_system/reports/
+webgis_system/.venv/
+webgis_system/documents/*.pdf
+webgis_system/documents/*.docx

@@ -1,0 +1,12 @@
+标题：The 30 m annual land cover datasets and its dynamics in China from 1985 to 2025
+作者：Jie Yang, Xin Huang
+发布日期：2026-01-08
+原始发布记录：https://zenodo.org/records/18180184
+DOI：10.5281/zenodo.18180184
+
+Using 335,709 Landsat images on the Google Earth Engine, we built the first Landsat-derived annual land cover product of China (CLCD) from 1985 to 2019. We collected the training samples by combining stable samples extracted from China's Land-Use/Cover Datasets (CLUD), and visually-interpreted samples from satellite time-series data, Google Earth and Google Map. Several temporal metrics were constructed via all available Landsat data and fed to the random forest classifier to obtain classification results. A post-processing method incorporating spatial-temporal filtering and logical reasoning was further proposed to improve the spatial-temporal consistency of CLCD.
+"*_albert.tif" are projected files via a proj4 string "+proj=aea +lat_1=25 +lat_2=47 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs".
+CLCD in 2025 is now available.
+1. Given that the USGS no longer maintains the Landsat Collection 1 data, we are now using the Collection 2 SR data to update the CLCD.
+2. All files in this version have been exported as Cloud Optimized GeoTIFF for more efficient processing on the cloud. Please check here for more details.
+3. Internal overviews and color tables are built into each file to speed up software loading and rendering.

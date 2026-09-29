@@ -1,0 +1,2532 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道关上社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "关上社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道双桥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "双桥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道日新社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "日新社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道福德社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "福德社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道双凤社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "双凤社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道小街社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "小街社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道福发社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "福发社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道福达社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "福达社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道关上中心区社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "关上中心区社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道彩云社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "彩云社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道石虎关社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "石虎关社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区关上街道巫家坝社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "关上街道",
+        "cun": "巫家坝社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道和平路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "和平路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道永胜路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "永胜路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道明通路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "明通路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道前卫路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "前卫路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道双龙桥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "双龙桥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.722286,
+          25.032487
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道黄家庄社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "黄家庄社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道吴井社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "吴井社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区太和街道佴家湾社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "太和街道",
+        "cun": "佴家湾社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道铁路新村社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "铁路新村社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道吴井路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "吴井路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道民航路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "民航路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道东郊路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "东郊路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道五里多社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "五里多社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道四〇三厂社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "四〇三厂社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道吴井新村社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "吴井新村社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道董家湾北段社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "董家湾北段社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道董家湾南段社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "董家湾南段社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道石井社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "石井社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区吴井街道五里社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "吴井街道",
+        "cun": "五里社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道金马社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "金马社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道东华路社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "东华路社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道大树营社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "大树营社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道方旺社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "方旺社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道十里社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "十里社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道牛街社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "牛街社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道黑土凹社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "黑土凹社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.74084,
+          25.03646
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道曙光社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "曙光社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道东骧社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "东骧社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道建工社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "建工社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道凤凰山社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "凤凰山社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道幸福邻里社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "幸福邻里社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区金马街道昆东社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "金马街道",
+        "cun": "昆东社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道小板桥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "小板桥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道鸣泉社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "鸣泉社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道羊甫社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "羊甫社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道晓东社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "晓东社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道云溪社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "云溪社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道金刚社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "金刚社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道四甲社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "四甲社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道中闸社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "中闸社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道林岸馨宸社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "林岸馨宸社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道海云社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "海云社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道海祥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "海祥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道宏福社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "宏福社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区小板桥街道宝华社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "小板桥街道",
+        "cun": "宝华社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道官渡社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "官渡社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道西庄社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "西庄社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道宝丰社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "宝丰社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道海东社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "海东社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道龙马社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "龙马社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道中营社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "中营社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道后所社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "后所社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道罗衙社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "罗衙社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道季官社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "季官社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道世纪城社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "世纪城社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道云秀社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "云秀社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.723005,
+          24.937433
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道艺术家园社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "艺术家园社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区官渡街道海宏社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "官渡街道",
+        "cun": "海宏社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道新亚洲体育城社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "新亚洲体育城社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.784961,
+          24.939855
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道螺蛳湾国际商贸城社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "螺蛳湾国际商贸城社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道子君社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "子君社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道矣六社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "矣六社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.776316,
+          24.917515
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道自卫社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "自卫社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道王官社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "王官社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道渔村社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "渔村社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道关锁社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "关锁社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道宏仁社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "宏仁社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道普自社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "普自社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.786517,
+          24.956914
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道广卫社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "广卫社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道五腊社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "五腊社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道塔密社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "塔密社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道星宇社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "星宇社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道欣景社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "欣景社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道映华社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "映华社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道花田社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "花田社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区矣六街道云翔社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "矣六街道",
+        "cun": "云翔社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713267,
+          24.964968
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道六甲社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "六甲社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道新一社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "新一社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道新二社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "新二社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道福保社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "福保社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道小河咀社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "小河咀社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道永胜社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "永胜社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.714315,
+          24.976615
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道陈家社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "陈家社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道盘龙社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "盘龙社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道金家社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "金家社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道星海社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "星海社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区六甲街道海华社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "六甲街道",
+        "cun": "海华社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.878768,
+          25.048094
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道板桥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "板桥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.874092,
+          25.059756
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道李其社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "李其社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道西冲社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "西冲社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道沙沟社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "沙沟社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道复兴社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "复兴社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.916336,
+          25.124173
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道花箐社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "花箐社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道长水社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "长水社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道沙井社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "沙井社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.915677,
+          25.058779
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道新发社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "新发社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道阿底社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "阿底社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道一朵云社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "一朵云社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道云桥社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "云桥社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道白汉场社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "白汉场社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道矣纳社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "矣纳社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道乌西社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "乌西社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道小哨社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "小哨社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道兔耳社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "兔耳社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道上对龙社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "上对龙社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道中对龙社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "中对龙社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道云瑞社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "云瑞社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区大板桥街道凌翔社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "大板桥街道",
+        "cun": "凌翔社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.802554,
+          24.994168
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道普照社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "普照社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道石坝社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "石坝社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道阿拉社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "阿拉社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道高坡社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "高坡社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.848687,
+          25.017838
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道海子社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "海子社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道清水社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "清水社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道八公里社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "八公里社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区阿拉街道长春社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "阿拉街道",
+        "cun": "长春社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区昆明经济技术开发区昌宏社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "昆明经济技术开发区",
+        "cun": "昌宏社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.795166,
+          24.993831
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区昆明经济技术开发区昆船社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "昆明经济技术开发区",
+        "cun": "昆船社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.822486,
+          24.984362
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区昆明经济技术开发区云南航天社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "昆明经济技术开发区",
+        "cun": "云南航天社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区昆明经济技术开发区顺通社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "昆明经济技术开发区",
+        "cun": "顺通社区居民委员会"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.713275,
+          24.960139
+        ]
+      },
+      "properties": {
+        "fullname": "云南省昆明市官渡区昆明经济技术开发区云知社区居民委员会",
+        "cuncode": "530111000000",
+        "sheng": "云南省",
+        "shi": "昆明市",
+        "xian": "官渡区",
+        "xiang": "昆明经济技术开发区",
+        "cun": "云知社区居民委员会"
+      }
+    }
+  ]
+}
