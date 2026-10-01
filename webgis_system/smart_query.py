@@ -11,7 +11,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from fastapi import HTTPException
-from config import USE_LOCAL_OLLAMA
+from model_gateway import chat, mode_name
 
 
 CLASS_NAMES = {
@@ -39,35 +39,15 @@ from_class/to_class 仅在明确问 A 到 B 的转移时填写，否则 null。e
 
 
 def _model_json(question, feedback=None):
-    payload = {"model": os.environ.get("OLLAMA_MODEL", "qwen2.5:7b") if USE_LOCAL_OLLAMA
-               else os.environ.get("MODEL_NAME", "gpt-5.6-sol"),
-               "messages": [{"role": "system", "content": SYSTEM_PROMPT},
-                            {"role": "user", "content": question if not feedback else
-                             f"问题：{question}\n上次规划无法执行：{feedback}。请重新判断是不是询问所有年份中的极值；若是，请选择对应的 extreme 操作，不要要求用户给出待求的年份。"}]}
-    if USE_LOCAL_OLLAMA:
-        url = os.environ.get("OLLAMA_CHAT_URL", "http://127.0.0.1:11434/api/chat")
-        payload.update(stream=False, format="json")
-        headers = {"Content-Type": "application/json"}
-        mode = "ollama"
-    else:
-        base = os.environ.get("MODEL_API_BASE_URL", "").rstrip("/")
-        key = os.environ.get("MODEL_API_KEY", "")
-        if not base or not key:
-            raise HTTPException(503, "问答规划模型未配置，请检查模型地址和密钥")
-        url = base + "/chat/completions"
-        headers = {"Content-Type": "application/json", "Authorization": f"Bearer {key}"}
-        mode = "cloud"
+    messages = [{"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": question if not feedback else
+                 f"问题：{question}\n上次规划无法执行：{feedback}。请重新判断是不是询问所有年份中的极值；若是，请选择对应的 extreme 操作，不要要求用户给出待求的年份。"}]
     try:
-        request = Request(url, data=json.dumps(payload).encode("utf-8"),
-                          headers=headers, method="POST")
-        # 本地模型首次载入内存可能明显慢于后续请求。
-        # 超时仅控制等待，不改变模型结果或统计口径。
-        with urlopen(request, timeout=120 if USE_LOCAL_OLLAMA else 60) as response:
-            data = json.load(response)
-        content = (data["message"]["content"] if USE_LOCAL_OLLAMA
-                   else data["choices"][0]["message"]["content"])
+        content = chat(messages, json_mode=True)["content"]
         content = content.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
-        return json.loads(content), mode
+        return json.loads(content), mode_name()
+    except HTTPException:
+        raise
     except (HTTPError, URLError, TimeoutError, OSError, ValueError, KeyError, TypeError) as exc:
         print(f"问答规划失败：{type(exc).__name__}: {exc}")
         raise HTTPException(503, "智能问答规划未就绪，请检查模型服务或终端日志") from exc
@@ -315,6 +295,8 @@ def answer_question(question):
     from app import (annual_statistics, compare_statistics, area_timeseries,
                      yearly_net_change, transition_matrix, changed_area_statistics,
                      graph_subgraph, _retrieve_documents, _generate_from_evidence)
+    if mode_name() == "none":
+        raise HTTPException(503, "当前未启用模型")
     try:
         plan, planner_mode = _model_json(question)
     except HTTPException as exc:

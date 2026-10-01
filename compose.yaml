@@ -89,12 +89,12 @@ services:
       NEO4J_USER: ${NEO4J_USER}
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
       NEO4J_DATABASE: neo4j
-      USE_LOCAL_OLLAMA: ${USE_LOCAL_OLLAMA}
-      MODEL_API_BASE_URL: ${MODEL_API_BASE_URL}
-      MODEL_API_KEY: ${MODEL_API_KEY}
-      MODEL_NAME: ${MODEL_NAME}
-      OLLAMA_CHAT_URL: http://ollama:11434/api/chat
-      OLLAMA_MODEL: ${OLLAMA_MODEL}
+      MODEL_PROVIDER: ${MODEL_PROVIDER:-none}
+      MODEL_API_BASE_URL: ${MODEL_API_BASE_URL:-}
+      MODEL_API_KEY: ${MODEL_API_KEY:-}
+      MODEL_NAME: ${MODEL_NAME:-}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:7b}
       EMBEDDING_MODEL: ${EMBEDDING_MODEL}
       CLCD_DIR: /data/clcd_guandu
       CHROMA_DIR: /app/data/chroma

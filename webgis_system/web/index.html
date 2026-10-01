@@ -66,6 +66,7 @@
 <body>
   <header>
     <h1>官渡区 1990–2025 年土地覆盖变化查询系统</h1>
+    <p id="model-status" role="status">模型状态：正在读取</p>
   </header>
   <main>
     <section aria-labelledby="query-title">
@@ -138,6 +139,11 @@
     const API = new URLSearchParams(location.search).get("api") ||
       (location.protocol === "file:" ? "http://127.0.0.1:8001" : "");
     const byId = id => document.getElementById(id);
+    fetch(`${API}/api/model/status`).then(response => response.json()).then(data => {
+      byId("model-status").textContent = `模型状态：${data.label}`;
+    }).catch(() => {
+      byId("model-status").textContent = "模型状态：暂不可用";
+    });
     const queryStatus = byId("query-status");
     const mapStatus = byId("map-status");
     const startInput = byId("start-year");

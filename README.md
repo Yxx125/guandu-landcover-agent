@@ -44,3 +44,5 @@ cd webgis_system
 ```
 
 生产部署细节见 `DEPLOYMENT.md`。
+
+模型默认禁用。`cloud`、`ollama`、`none` 三种启动命令及配置项见 `DEPLOYMENT.md`；网页页眉显示当前模型模式。

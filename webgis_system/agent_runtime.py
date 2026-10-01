@@ -1,17 +1,10 @@
 """官渡区两项统计工具的 Ollama Function Calling 网页试验入口。"""
 
 import json
-import os
 import re
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
 from fastapi import HTTPException
 from agent_tools import CORE_TOOL_SCHEMAS, execute_tool
-
-
-OLLAMA_URL = os.environ.get("OLLAMA_CHAT_URL", "http://127.0.0.1:11434/api/chat")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:7b")
 
 
 def _expected(question):

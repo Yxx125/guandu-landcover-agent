@@ -75,6 +75,8 @@ TOOL_SCHEMAS.extend([
           (*PERIOD, "lon", "lat")),
     _tool("get_knowledge_graph", "查询 Neo4j 年度观测与相邻年份地类转换关系。多年边权是相邻年份累计，不是起止两年矩阵。",
           {**PERIOD, "class_codes": CLASSES}, (*PERIOD, "class_codes")),
+    _tool("search_documents", "检索已导入的官渡区规划与 CLCD 资料，只返回文档证据，不生成统计数值。",
+          {"question": {"type": "string", "minLength": 3, "maxLength": 500}}, ("question",)),
 ])
 
 # 已通过网页验收的两个工具继续单独暴露给现有试验入口，避免新增工具改变原有示例行为。
@@ -124,6 +126,15 @@ def _get(path, params):
 
 def execute_tool(name, arguments):
     """只执行明确登记的只读工具，不执行模型生成的代码或 SQL。"""
+    if name == "search_documents":
+        if (not isinstance(arguments, dict) or set(arguments) != {"question"} or
+                not isinstance(arguments["question"], str) or
+                not 3 <= len(arguments["question"].strip()) <= 500):
+            raise ValueError("question 必须是 3–500 字的检索问题")
+        from app import _retrieve_documents
+        documents, status = _retrieve_documents(arguments["question"].strip())
+        return {"documents": documents, "retrieval_status": status,
+                "source": "官渡区 Chroma 文档向量索引"}
     if name == "get_annual_area":
         args = _parameters(arguments, ("year",))
         raw = _get("/api/stats/annual", args)

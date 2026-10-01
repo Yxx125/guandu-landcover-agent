@@ -12,9 +12,13 @@ import config
 
 def chat(messages, *, tools=None, tool_choice="auto", json_mode=False, timeout=None):
     """返回统一的 assistant message；工具参数保留提供商原值供调用端校验。"""
-    local = config.USE_LOCAL_OLLAMA
+    provider = config.MODEL_PROVIDER
+    if provider == "none":
+        raise HTTPException(503, "当前未启用模型")
+    local = provider == "ollama"
     if local:
-        url = os.environ.get("OLLAMA_CHAT_URL", "http://127.0.0.1:11434/api/chat")
+        base = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
+        url = base + "/api/chat"
         payload = {"model": os.environ.get("OLLAMA_MODEL", "qwen2.5:7b"),
                    "messages": messages, "stream": False,
                    "options": {"temperature": 0}}
@@ -53,4 +57,4 @@ def chat(messages, *, tools=None, tool_choice="auto", json_mode=False, timeout=N
 
 
 def mode_name():
-    return "ollama" if config.USE_LOCAL_OLLAMA else "cloud"
+    return config.MODEL_PROVIDER

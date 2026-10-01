@@ -31,7 +31,8 @@ def prepare(state: FullState) -> FullState:
             "比较起止两年地类流转选 get_transition_matrix；两年各地类面积对比选 compare_years；"
             "单年面积选 get_annual_area；逐年面积趋势选 get_area_timeseries；"
             "逐年净增减选 get_yearly_net_change；变化斑块/阈值筛选选 get_changed_areas；"
-            "经纬度点位历史选 get_point_history；知识图谱关系选 get_knowledge_graph。"
+            "经纬度点位历史选 get_point_history；知识图谱关系选 get_knowledge_graph；"
+            "规划资料或数据来源选 search_documents。"
             "地类编码：1耕地，2林地，3灌丛，4草地，5水体，6积雪冰川，7裸地，8建设用地，9湿地。"
             "只有用户明确给出经纬度时才能选择点位工具。没有必要参数时不要猜测。")},
         {"role": "user", "content": question}], "trace": [{"step": "prepare"}]}
@@ -63,6 +64,10 @@ def choose(state: FullState) -> FullState:
 
 def check_arguments(state: FullState) -> FullState:
     args = state["arguments"]
+    if state["name"] == "search_documents":
+        if args.get("question") != state["question"]:
+            raise HTTPException(422, "检索问题必须与用户原问题一致")
+        return {"trace": state["trace"] + [{"step": "check_arguments", "verified": True}]}
     years = [int(x) for x in re.findall(r"(?<!\d)(?:19\d{2}|20[0-2]\d)(?!\d)", state["question"])]
     requested_years = set(years)
     supplied_years = {v for k, v in args.items() if k in {"year", "start_year", "end_year"} and type(v) is int}
@@ -156,6 +161,11 @@ def summarize(state: FullState) -> FullState:
         lead = (f"坐标（{a['lon']}, {a['lat']}）{period}地类历史：" + "；".join(
             f"{x['year']}年 {x['class_name']}" for x in r["history"]) +
             f"；转变 {r['change_count']} 次。")
+    elif name == "search_documents":
+        snippets = r["documents"][:3]
+        lead = ("检索到的资料片段：" + "；".join(
+            f"{item['source']}：{item['text'][:160]}" for item in snippets) + "。"
+            if snippets else "当前没有检索到可用资料片段。")
     else:
         lead = (f"官渡区 {period}知识图谱返回 {len(r['nodes'])} 个节点、"
                 f"{len(r['links'])} 条关系。说明：{r['note']}")

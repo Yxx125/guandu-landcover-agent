@@ -20,7 +20,9 @@ def env_bool(name: str, default: bool = False) -> bool:
 
 
 APP_ENV = os.getenv("APP_ENV", "development")
-USE_LOCAL_OLLAMA = env_bool("USE_LOCAL_OLLAMA", False)
+MODEL_PROVIDER = os.getenv("MODEL_PROVIDER", "none").strip().lower()
+if MODEL_PROVIDER not in {"cloud", "ollama", "none"}:
+    raise ValueError("MODEL_PROVIDER 只能是 cloud、ollama 或 none")
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "BAAI/bge-small-zh-v1.5")
 
 DATABASE_HOST = os.getenv("DATABASE_HOST", "127.0.0.1")

@@ -7,7 +7,6 @@ r"""本地 Ollama Function Calling 闭环演示。
 """
 
 import json
-import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -17,9 +16,8 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 from agent_tools import TOOL_SCHEMAS, execute_tool
+from model_gateway import chat as model_chat
 
-URL = os.environ.get("OLLAMA_CHAT_URL", "http://127.0.0.1:11434/api/chat")
-MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:7b")
 EXAMPLES = (
     "官渡区 2025 年耕地面积是多少？",
     "官渡区 2010 到 2020 年耕地转建设用地面积是多少？",
@@ -27,19 +25,7 @@ EXAMPLES = (
 
 
 def chat(messages):
-    payload = {"model": MODEL, "messages": messages,
-               "tools": TOOL_SCHEMAS, "stream": False,
-               "options": {"temperature": 0}}
-    request = Request(URL, json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-                      headers={"Content-Type": "application/json"}, method="POST")
-    try:
-        with urlopen(request, timeout=120) as response:
-            data = json.load(response)
-        return data["message"]
-    except HTTPError as exc:
-        raise RuntimeError(f"Ollama 返回 HTTP {exc.code}") from exc
-    except (URLError, TimeoutError, OSError, ValueError, KeyError) as exc:
-        raise RuntimeError(f"Ollama 响应失败：{type(exc).__name__}：{exc}") from exc
+    return model_chat(messages, tools=TOOL_SCHEMAS, timeout=120)
 
 
 def run(question):

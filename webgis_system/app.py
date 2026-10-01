@@ -31,7 +31,6 @@ from config import (
     CLCD_DIR,
     GEOSERVER_INTERNAL_URL,
     GEOSERVER_PUBLIC_URL,
-    USE_LOCAL_OLLAMA,
     EMBEDDING_MODEL,
     database_connect_kwargs,
 )
@@ -121,6 +120,14 @@ def health():
 def health_live():
     """进程存活检查，不访问外部依赖。"""
     return {"status": "ok", "service": "guandu-api"}
+
+
+@app.get("/api/model/status")
+def model_status():
+    from model_gateway import mode_name
+    provider = mode_name()
+    return {"provider": provider,
+            "label": {"cloud": "云端 API", "ollama": "本地 Ollama", "none": "未启用"}[provider]}
 
 
 @app.get("/health/ready")
@@ -1000,7 +1007,10 @@ def _retrieve_documents(question: str):
 
 
 def _generate_from_evidence(question: str, factual_answer: str, graph, documents):
-    """按 config.py 的唯一开关选择 Ollama 或兼容 Chat Completions 的云端服务。"""
+    """Use the shared model gateway only to explain verified evidence."""
+    from model_gateway import chat, mode_name
+    if mode_name() == "none":
+        return factual_answer, "deterministic_statistics"
     prompt = (
         "你只负责补充一句中文解释。确定性统计结论将由程序原样放在答案开头，"
         "因此不要复述、修改任何数字、年份、面积、百分比或单位，也不要使用阿拉伯数字。"
@@ -1012,36 +1022,15 @@ def _generate_from_evidence(question: str, factual_answer: str, graph, documents
         f"图谱关系：{json.dumps(graph['links'][:8], ensure_ascii=False) if graph else '未就绪'}\n"
         f"检索文本：{json.dumps(documents, ensure_ascii=False)[:5000]}"
     )
-    if USE_LOCAL_OLLAMA:
-        url = os.environ.get("OLLAMA_CHAT_URL", "http://127.0.0.1:11434/api/chat")
-        payload = {"model": os.environ.get("OLLAMA_MODEL", "qwen2.5:7b"),
-                   "messages": [{"role": "user", "content": prompt}], "stream": False}
-        headers = {"Content-Type": "application/json"}
-        mode = "ollama"
-    else:
-        base = os.environ.get("MODEL_API_BASE_URL", "").rstrip("/")
-        key = os.environ.get("MODEL_API_KEY", "")
-        if not base or not key:
-            return factual_answer, "deterministic_statistics"
-        url = base + "/chat/completions"
-        payload = {"model": os.environ.get("MODEL_NAME", "gpt-5.6-sol"),
-                   "messages": [{"role": "user", "content": prompt}]}
-        headers = {"Content-Type": "application/json", "Authorization": f"Bearer {key}"}
-        mode = "cloud"
     try:
-        request = Request(url, data=json.dumps(payload).encode("utf-8"),
-                          headers=headers, method="POST")
-        with urlopen(request, timeout=45) as response:
-            data = json.load(response)
-        generated = (data["message"]["content"] if mode == "ollama"
-                     else data["choices"][0]["message"]["content"]).strip()
+        generated = chat([{"role": "user", "content": prompt}], timeout=45)["content"].strip()
         # 统计结论始终直接来自本地计算，不让模型重述数值。
         # 生成文字出现数字时拒绝该文字，避免把未经校验的新数值带给用户。
         if not generated or re.search(r"\d", generated):
             print("模型解释含数字或为空，返回确定性统计结论")
             return factual_answer, "deterministic_fallback"
-        return factual_answer + "\n" + generated, mode
-    except (HTTPError, URLError, TimeoutError, OSError, ValueError, KeyError) as exc:
+        return factual_answer + "\n" + generated, mode_name()
+    except (HTTPError, URLError, TimeoutError, OSError, ValueError, KeyError, HTTPException) as exc:
         print(f"生成服务不可用，返回确定性统计回答：{exc}")
         return factual_answer, "deterministic_fallback"
 

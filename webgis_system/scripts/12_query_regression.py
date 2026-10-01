@@ -95,6 +95,24 @@ def main():
         return result["answer"]
     case("非连续三年份单年面积最大", selected_years)
 
+    def different_outgoing_classes():
+        code, result = ask("2023到2025年的耕地转出多还是2016年到2025年林地转出的多")
+        assert code == 200, f"HTTP {code}: {result.get('detail', result)}"
+        assert result.get("generation_mode") == "validated_flow_periods"
+        facts = result["facts"]
+        assert [(x["start_year"], x["end_year"], x["class_code"]) for x in facts] == [
+            (2023, 2025, 1), (2016, 2025, 2)]
+        for fact in facts:
+            pixels = sum(matrix_area(fact["start_year"], fact["end_year"],
+                                     fact["class_code"], target)
+                         for target in range(1, 10) if target != fact["class_code"])
+            assert pixels == fact["pixel_count"], "转出面积与原始转移矩阵不一致"
+        larger = max(facts, key=lambda row: row["pixel_count"])
+        assert larger["label"] in result["answer"]
+        assert result["query"]["class_codes"] == [1, 2]
+        return result["answer"]
+    case("两区间两地类总转出比较", different_outgoing_classes)
+
     def supported(name, question, start, end, words=()):
         def verify():
             code, result = ask(question)

@@ -270,21 +270,33 @@ def _compare_explicit_outgoing_periods(question: str):
             r"(?:耕地|林地|草地|建设用地|水体|湿地)", question):
         return None  # 有向 A→B 与地类总转出不是同一指标。
     years = [int(x.group()) for x in YEAR.finditer(question)]
-    periods = [(int(a), int(b)) for a, b in re.findall(
+    period_pattern = re.compile(
         r"(?<!\d)((?:19\d{2}|20[0-2]\d))\s*(?:年)?\s*(?:到|至|→|—|–|-)\s*"
-        r"((?:19\d{2}|20[0-2]\d))\s*(?:年)?", question)]
+        r"((?:19\d{2}|20[0-2]\d))\s*(?:年)?")
+    matches = list(period_pattern.finditer(question))
+    periods = [(int(match.group(1)), int(match.group(2))) for match in matches]
     if not periods or len(periods) > 12 or len(periods) * 2 != len(years):
         return None
     if any(not (1990 <= start < end <= 2025) for start, end in periods):
         raise HTTPException(400, f"{direction}查询的每个区间须在 1990–2025 年内，且起始年早于结束年")
     codes = _codes(question)
-    if len(codes) != 1:
-        raise HTTPException(400, f"地类{direction}查询请明确且只指定一个地类")
+    if len(codes) == 1:
+        period_codes = [next(iter(codes))] * len(periods)
+    else:
+        # Bind each class to its own interval; never infer an unmentioned pairing.
+        segments = [question[match.end():matches[index + 1].start()
+                             if index + 1 < len(matches) else len(question)]
+                    for index, match in enumerate(matches)]
+        scoped_codes = [_codes(segment) for segment in segments]
+        if (_codes(question[:matches[0].start()]) or
+                any(len(item) != 1 for item in scoped_codes) or
+                set().union(*scoped_codes) != codes):
+            raise HTTPException(400, f"请在每个比较区间后明确指定一个{direction}地类")
+        period_codes = [next(iter(item)) for item in scoped_codes]
     if len(set(periods)) != len(periods):
         raise HTTPException(400, "比较区间不能重复")
-    code = next(iter(codes))
     facts = []
-    for start, end in periods:
+    for (start, end), code in zip(periods, period_codes):
         matrix = _matrix(start, end)
         pixels = (sum(matrix[source, code]["pixel_count"] for source in NAMES if source != code)
                   if incoming else
@@ -298,21 +310,26 @@ def _compare_explicit_outgoing_periods(question: str):
     else:
         peak = max(row["pixel_count"] for row in facts)
         winners = [row for row in facts if row["pixel_count"] == peak]
-        label = "、".join(f'{row["start_year"]}→{row["end_year"]} 年' for row in winners)
-        conclusion = f'{label}{NAMES[code]}{direction}最多，为 {peak*.0009:.4f} km²。'
-    detail = "；".join(f'{row["start_year"]}→{row["end_year"]} 年 {row["area_km2"]:.4f} km²'
-                      for row in facts)
+        label = "、".join(f'{row["start_year"]}→{row["end_year"]} 年{row["label"]}' for row in winners)
+        conclusion = f'{label}最多，为 {peak*.0009:.4f} km²。'
+    detail = "；".join(f'{row["start_year"]}→{row["end_year"]} 年{row["label"]} {row["area_km2"]:.4f} km²'
+                   for row in facts)
+    if len(facts) == 2 and facts[0]["pixel_count"] != facts[1]["pixel_count"]:
+        larger, smaller = sorted(facts, key=lambda row: row["pixel_count"], reverse=True)
+        conclusion = (f'{larger["start_year"]}→{larger["end_year"]} 年{larger["label"]}更多，'
+                      f'比{smaller["start_year"]}→{smaller["end_year"]} 年{smaller["label"]}'
+                      f'多 {(larger["pixel_count"] - smaller["pixel_count"])*.0009:.4f} km²。')
     return {
         "answer": (f"结论：{conclusion}\n依据：{detail}。各项分别取起止年 CLCD 转移矩阵中"
-                   f"{NAMES[code]}所在{'列' if incoming else '行'}除对角线外的像元数之和，"
+                   f"对应地类所在{'列' if incoming else '行'}除对角线外的像元数之和，"
                    "再乘每像元 0.0009 km²；不是全区变化面积，也不是该地类面积净变化。"),
         "facts": facts, "tool": "multi_tool", "generation_mode": "validated_flow_periods",
         "tool_trace": [{"step": "run_tool", "tool": "transition_matrix",
                         "start_year": a, "end_year": b} for a, b in periods],
         "query": {"start_year": min(years), "end_year": max(years),
-                  "class_codes": [code],
+                  "class_codes": sorted(set(period_codes)),
                   "chart_mode": "transition" if len(periods) == 1 else "periodcompare",
-                  "comparison_kind": "transition", "comparison_label": f"{NAMES[code]}各区间{direction}面积",
+                  "comparison_kind": "transition", "comparison_label": f"各区间地类{direction}面积",
                   "comparison_periods": facts, "min_patch_km2": 0},
         "evidence": {"statistics": "各区间 CLCD 起止年像元转移矩阵",
                      "documents": [], "graph_paths": [], "retrieval_status": "not_needed"},
@@ -513,6 +530,32 @@ def answer_agent_query(question: str) -> dict:
             "generation_mode": "validated_definition",
             "tool_trace": [{"step": "definition", "term": "面积净变化"}],
         }
+    from model_gateway import mode_name
+    if mode_name() == "none":
+        year_match = re.fullmatch(
+            r"(?:官渡区)?\s*(19\d{2}|20[0-2]\d)\s*年\s*"
+            r"(耕地|林地|灌丛|草地|水体|裸地|建设用地|湿地)\s*面积"
+            r"(?:是多少|有多少|多少)?[？?。]?\s*", question)
+        if year_match:
+            from agent_graph_full import summarize
+            from agent_tools import CLASS_NAMES, execute_tool
+            year = int(year_match.group(1))
+            if year > 2025:
+                raise HTTPException(400, "年份须在 1990–2025 范围内")
+            args = {"year": year}
+            result = execute_tool("get_annual_area", args)
+            answer = summarize({"question": question, "name": "get_annual_area",
+                                "arguments": args, "result": result, "trace": []})["answer"]
+            return {"answer": answer,
+                    "query": {"start_year": year, "end_year": year,
+                              "class_codes": [code for code, name in CLASS_NAMES.items()
+                                              if name.startswith(year_match.group(2))],
+                              "chart_mode": "annual", "min_patch_km2": 0},
+                    "facts": result["classes"], "tool": "get_annual_area",
+                    "arguments": args, "tool_result": result,
+                    "tool_trace": [{"tool": "get_annual_area", "arguments": args}],
+                    "generation_mode": "deterministic_statistics"}
+        raise HTTPException(503, "当前未启用模型")
     from agent_graph_full import answer_with_full_graph
     from smart_query import answer_question
 
